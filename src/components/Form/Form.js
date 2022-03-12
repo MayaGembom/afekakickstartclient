@@ -11,10 +11,11 @@ import useStyles from './styles';
 import { createPost } from '../../actions/posts';
 
 const Form = ({ currentId, setCurrentId }) => {
-  const [postData, setPostData] = useState({ title: '', description: '', creator: '', category: '',goal: 0, selectedFile: '',  deadLine: new Date()});
+  const [postData, setPostData] = useState({ title: '', description: '', category: '',goal: 0, selectedFile: '',  deadLine: new Date()});
   const post = useSelector((state) => (currentId ? state.posts.find((description) => description._id === currentId) : null));
   const dispatch = useDispatch();
   const classes = useStyles();
+  const user = JSON.parse(localStorage.getItem('profile'));
 
   useEffect(() => {
     if (post) setPostData(post);
@@ -22,17 +23,28 @@ const Form = ({ currentId, setCurrentId }) => {
 
   const clear = () => {
     setCurrentId(0);
-    setPostData({ title: '', description: '', creator: '', category: '', goal: 0 ,selectedFile: '', deadLine: new Date() });
+    setPostData({ title: '', description: '', category: '', goal: 0 ,selectedFile: '', deadLine: new Date() });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (currentId === 0) {
-      dispatch(createPost(postData));
+      dispatch(createPost({ ...postData, name: user?.result?.name }));
       clear();
     }
   };
+
+  if (!user?.result?.name) {
+    return (
+      <Paper className={classes.paper}>
+        <Typography variant="h6" align="center">
+          Please Sign In
+        </Typography>
+      </Paper>
+    );
+  }
+
 
   return (
 
@@ -41,7 +53,6 @@ const Form = ({ currentId, setCurrentId }) => {
         <Typography variant="h6">{currentId ? `Editing "${post.title}"` : 'Publish Project'}</Typography>
         <TextField name="title" variant="outlined" label="Title" fullWidth value={postData.title} onChange={(e) => setPostData({ ...postData, title: e.target.value })} />
         <TextField name="description" variant="outlined" label="Description" fullWidth multiline rows={4} value={postData.description} onChange={(e) => setPostData({ ...postData, description: e.target.value })} />
-        <TextField name="creator" variant="outlined" label="Creator" fullWidth value={postData.creator} onChange={(e) => setPostData({ ...postData, creator: e.target.value })} />
         <FormControl className={`${classes.formControl}`} fullWidth variant="outlined">
           <InputLabel htmlFor="category-select-label">  Category</InputLabel>
           <Select name="category" labelId="category-select-label" fullWidth value={postData.category} label="Category" onChange={(e) =>   setPostData({ ...postData, category: e.target.value }) }>

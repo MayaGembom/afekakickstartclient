@@ -11,6 +11,7 @@ import useStyles from './styles';
 const Post = ({ post, setCurrentId }) => {
   const dispatch = useDispatch();
   const classes = useStyles();
+  const user = JSON.parse(localStorage.getItem('profile'));
 
   return (
     <Card className={classes.card}>
@@ -39,7 +40,11 @@ const Post = ({ post, setCurrentId }) => {
         completed={Math.round((post.pledgeCount / post.goal) * 100)}
       />
       <CardActions className={classes.cardActions}>
-        <Button size="small" color="primary" onClick={() => dispatch(deletePost(post._id))}><DeleteIcon fontSize="small" />Delete</Button>
+        {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
+        <Button size="small" color="secondary" onClick={() => dispatch(deletePost(post._id))}>
+          <DeleteIcon fontSize="small" /> Delete
+        </Button>
+        )}
       </CardActions>
     </Card>
   );
