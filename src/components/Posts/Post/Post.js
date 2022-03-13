@@ -27,7 +27,7 @@ const Post = ({ post, setCurrentId }) => {
 
       <CardContent>
       <label>Creator: </label>
-      <Typography className={classes.creator} gutterBottom variant="h6" component="h2">{post.creator}</Typography>
+      <Typography className={classes.creator} gutterBottom variant="h6" component="h2">{post.name}</Typography>
       <label>Description: </label>
         <Typography variant="body2" color="textSecondary" component="h2">{post.description}</Typography>
         <label>Goal: </label>
