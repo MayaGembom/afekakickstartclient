@@ -1,4 +1,4 @@
-import { FETCH_ALL, CREATE, DELETE } from '../constants/actionTypes';
+import { FETCH_ALL, CREATE, DELETE,PLADGE } from '../constants/actionTypes';
 
 import * as api from '../api/index.js';
 
@@ -29,5 +29,17 @@ export const deletePost = (id) => async (dispatch) => {
     dispatch({ type: DELETE, payload: id });
   } catch (error) {
     console.log(error.message);
+  }
+};
+
+export const pladgeProject = (id, pledge) => async (dispatch) => {
+
+  try {
+    const { data } = await api.pladgeProject(id, pledge);
+
+    console.log("----" + pledge)
+    dispatch({ type: PLADGE, payload: data });
+  } catch (error) {
+    console.log(error);
   }
 };

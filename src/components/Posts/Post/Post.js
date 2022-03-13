@@ -4,6 +4,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
 import ProgressBar from "../../ProgressBar";
+import FormDialog from "../../FormDialog";
 
 import {deletePost } from '../../../actions/posts';
 import useStyles from './styles';
@@ -39,6 +40,7 @@ const Post = ({ post, setCurrentId }) => {
         bgcolor={"#47bcd4"}
         completed={Math.round((post.pledgeCount / post.goal) * 100)}
       />
+      <FormDialog p={post._id} />
       <CardActions className={classes.cardActions}>
         {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
         <Button size="small" color="secondary" onClick={() => dispatch(deletePost(post._id))}>
