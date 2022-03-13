@@ -42,7 +42,8 @@ export default makeStyles({
     margin: '20px',
   },
   title: {
-    padding: '0 16px',
+    fontSize: '2em',
+    textShadow: "2px 2px #000000"
   },
   cardActions: {
     padding: '0 16px 8px 16px',
@@ -60,5 +61,8 @@ export default makeStyles({
     textTransform: "uppercase",
     cursor: "pointer",
   },
-
+  cardAction: {
+    display: 'block',
+    textAlign: 'initial',
+  },
 });

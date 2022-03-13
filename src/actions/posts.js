@@ -1,6 +1,20 @@
-import { FETCH_ALL, CREATE, DELETE,PLADGE } from '../constants/actionTypes';
+import { FETCH_ALL, CREATE, DELETE,PLADGE,START_LOADING ,FETCH_POST} from '../constants/actionTypes';
 
 import * as api from '../api/index.js';
+
+
+export const getPost = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: START_LOADING });
+
+    const { data } = await api.fetchPost(id);
+
+    dispatch({ type: FETCH_POST, payload: { post: data } });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 
 export const getPosts = () => async (dispatch) => {
   try {
@@ -36,9 +50,8 @@ export const pladgeProject = (id, pledge) => async (dispatch) => {
 
   try {
     const { data } = await api.pladgeProject(id, pledge);
-
-    console.log("----" + pledge)
     dispatch({ type: PLADGE, payload: data });
+
   } catch (error) {
     console.log(error);
   }

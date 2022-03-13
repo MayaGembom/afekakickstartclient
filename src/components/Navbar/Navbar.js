@@ -31,10 +31,11 @@ const Navbar = () => {
   }, [location]);
 
   return (
+    <>
     <AppBar className={classes.appBar} position="static" color="inherit">
       <div className={classes.brandContainer}>
-        <Typography component={Link} to="/" className={classes.heading} variant="h2" align="center">Afeka KickStarter</Typography>
-      </div>
+        <Typography component={Link} to="/" className={classes.heading} >Afeka KickStarter</Typography>
+      </div>   
       <Toolbar className={classes.toolbar}>
         {user?.result ? (
           <div className={classes.profile}>
@@ -46,7 +47,9 @@ const Navbar = () => {
           <Button component={Link} to="/auth" variant="contained" color="primary">Sign In</Button>
         )}
       </Toolbar>
+    
     </AppBar>
+    </>
   );
 };
 

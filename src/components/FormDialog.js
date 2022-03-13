@@ -18,7 +18,6 @@ import { useDispatch } from 'react-redux';
 
 export default function FormDialog(props) {
 const postid = props.p;
-console.log(postid)
 const dispatch = useDispatch();
 const [open, setOpen] = React.useState(false);
 const [pledge, setPledge] = React.useState(500);
