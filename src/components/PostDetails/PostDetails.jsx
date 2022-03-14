@@ -32,15 +32,15 @@ const Post = () => {
   }
 
   return (
-<Paper style={{ padding: '20px', borderRadius: '15px' }} elevation={6}>
+    <Paper style={{ padding: '20px', borderRadius: '15px' }} elevation={6}>
       <div className={classes.card}>
         <div className={classes.section}>
           <Typography variant="h3" component="h2">{post.title}</Typography>
-          
+
           <div><br></br>
-        <span className={classes.tag}> {post.category} </span>
-        <br></br>
-      </div>
+            <span className={classes.tag}> {post.category} </span>
+            <br></br>
+          </div>
           <Typography variant="h6">
             Created by:
             {post.name}
@@ -50,22 +50,22 @@ const Post = () => {
           <Typography variant="body1"><strong>{post.description}</strong></Typography>
           <Divider style={{ margin: '20px 0' }} />
           <ProgressBar
-        className={classes.details}
-        key={post.id}
-        bgcolor={"#47bcd4"}
-        completed={Math.round((post.pledgeCount / post.goal) * 100)}
-      />
-<Typography variant="body1" align='center'><strong>{post.pledgeCount} $ Raised From {post.goal} $ Main Goal</strong></Typography> 
+            className={classes.details}
+            key={post.id}
+            bgcolor={"#47bcd4"}
+            completed={Math.round((post.pledgeCount / post.goal) * 100)}
+          />
+          <Typography variant="body1" align='center'><strong>{post.pledgeCount} $ Raised From {post.goal} $ Main Goal</strong></Typography>
           <Divider style={{ margin: '20px 0' }} />
           <center>
-          <Link href={post.link} fontSize={"3em"}>Project's Link</Link>
+            <Link href={post.link} fontSize={"3em"}>Project's Link</Link>
           </center>
         </div>
         <div className={classes.imageSection}>
           <img className={classes.media} src={post.selectedFile || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} alt={post.title} />
         </div>
       </div>
-     
+
       <iframe width="100%" height="500" src={`https://www.youtube.com/embed/${post.vdlink}`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       <br></br> <br></br>
       <FormDialog p={post._id} />

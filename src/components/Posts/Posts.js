@@ -17,6 +17,8 @@ const Posts = ({ setCurrentId }) => {
 
     !posts.length ? <CircularProgress /> : (
       <>
+        <h2>Now Funding</h2>
+        <Divider style={{ margin: '20px 0' }} />
         <Grid className={classes.container} container alignItems="stretch" spacing={3}>
           {posts.map((post) => (
             (post?.pledgeCount < post?.goal) && (new Date(post?.deadLine) > currentDate) && (
@@ -26,20 +28,22 @@ const Posts = ({ setCurrentId }) => {
             )
           ))}
         </Grid>
+        <h2>Expired</h2>
         <Divider style={{ margin: '20px 0' }} />
-
         <Grid className={classes.container} container alignItems="stretch" spacing={3}>
           {posts.map((post) => (
             (post?.pledgeCount < post?.goal) && (new Date(post?.deadLine) < currentDate) && (
               <Grid key={post._id} item xs={12} sm={10} md={4} lg={3}>
-                <Post post={post} setCurrentId={setCurrentId} />
+                <div style={{ opacity: 0.5, pointerEvents: "none" }}
+                  disabled>
+                  <Post post={post} setCurrentId={setCurrentId} />
+                </div>
               </Grid>
             )
           ))}
         </Grid>
-
+        <h2>Successfully Funded</h2>
         <Divider style={{ margin: '20px 0' }} />
-
         <Grid className={classes.container} container alignItems="stretch" spacing={3}>
           {posts.map((post) => (
             (post?.pledgeCount >= post?.goal) && (
